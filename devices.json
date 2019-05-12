@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Yeelight Bulb (Color)",
+        "preview": "color-bulb.jpg",
+        "type": "light",
+        "codeName": "color-bulb",
+        "discoverable": true,
+        "actions" : ["toggle"]
+    }
+]
