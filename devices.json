@@ -5,6 +5,7 @@
         "type": "light",
         "codeName": "color-bulb",
         "discoverable": true,
-        "actions" : ["toggle"]
+        "actions" : ["toggle"],
+        "properties": ["status","brightness"]
     }
 ]
