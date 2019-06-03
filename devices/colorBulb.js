@@ -1,8 +1,10 @@
+import Yeelight, { Discover } from 'yeelight-awesome';
+
 export default {
   name: "Yeelight Bulb (Color)",
   type: "light",
   actions: {
-    toggle: (data, updateData, extra, log) => {
+    toggle: () => {
       const yee = new Yeelight({ lightIp: data.host, lightPort: data.port });
 
       try {
@@ -15,10 +17,27 @@ export default {
     }
   },
   state: {
-    status: (data, updateData, extra) => {},
-    brightness: (data, updateData, extra) => {}
+    status: ({data, updateData, extra, log}) => {},
+    brightness: ({data, updateData, extra, log}) => {}
   },
-  discover: () => {}
+  discover: ({createDeviceEntry,onCancel,log}) => {
+    const yeeDiscover = new Discover();
+
+    try {
+      const devices = await yeeDiscover.start();
+      if (devices && devices.length > 0) {
+        devices.forEach(device => {
+          createDeviceEntry(device);
+        })
+      }
+    } catch (error) {
+      log.error(error);
+    }
+
+    yeeDiscover.destroy();
+
+    return outputDevices;
+  }
 };
 
 // device[id][actions][action];
@@ -26,4 +45,4 @@ export default {
 
 // DeviceId
 
-driver.devices[code][actions][action];
+// driver.devices[code][actions][action];
