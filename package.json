@@ -1,0 +1,13 @@
+{
+  "name": "dobby-yeelight-driver",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A yeelight driver for dobby house assistant",
+  "main": "index.js",
+  "repository": "git@github.com:geocool/dobby-yeelight-driver.git",
+  "author": "George Sofianos <georgesofianosgr@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "yeelight-awesome": "^1.0.12"
+  }
+}

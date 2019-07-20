@@ -1,5 +1,5 @@
-import colorBulb from "./colorBulb";
+const colorBulb = require("./colorBulb");
 
-export default {
+module.exports = {
   "color-bulb": colorBulb
 };

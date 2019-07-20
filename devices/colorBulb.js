@@ -1,26 +1,32 @@
-import Yeelight, { Discover } from 'yeelight-awesome';
+const Yeelight = require("yeelight-awesome");
+const Discover = Yeelight.Discover;
 
-export default {
+module.exports = {
   name: "Yeelight Bulb (Color)",
   type: "light",
   actions: {
-    toggle: () => {
-      const yee = new Yeelight({ lightIp: data.host, lightPort: data.port });
+    toggle: async ({ data }) => {
+      const yee = new Yeelight.Yeelight({
+        lightIp: data.host,
+        lightPort: data.port
+      });
 
       try {
-        const device = yee.connect();
+        const device = await yee.connect();
         await device.toggle();
         device.disconnect();
-      } catch(error) {
-        log.error(error);
+      } catch (error) {
+        // TODO: Log
+        console.log(error);
+        // log.error(error);
       }
     }
   },
   state: {
-    status: ({data, updateData, extra, log}) => {},
-    brightness: ({data, updateData, extra, log}) => {}
+    status: ({ data, updateData, extra, log }) => {},
+    brightness: ({ data, updateData, extra, log }) => {}
   },
-  discover: ({createDeviceEntry,onCancel,log}) => {
+  discover: async ({ createDeviceEntry, onCancel, log }) => {
     const yeeDiscover = new Discover();
 
     try {
@@ -28,15 +34,15 @@ export default {
       if (devices && devices.length > 0) {
         devices.forEach(device => {
           createDeviceEntry(device);
-        })
+        });
       }
     } catch (error) {
-      log.error(error);
+      // TODO: Log
+      console.log(error);
+      // log.error(error);
     }
 
     yeeDiscover.destroy();
-
-    return outputDevices;
   }
 };
 
